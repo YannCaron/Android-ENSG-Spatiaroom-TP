@@ -2,7 +2,10 @@ package fr.ign.geosurvey;
 
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -18,6 +21,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
 
+    // Create attributes for future component handling
+    private Button bt_point, bt_topology;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,24 +35,42 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        // Find components instances
+        bt_point = this.findViewById(R.id.bt_point);
+        bt_topology = this.findViewById(R.id.bt_topology);
+
+        // manage events
+        bt_point.setOnClickListener(new View.OnClickListener() { // old school with anonymous classes
+            @Override
+            public void onClick(View view) {
+                MapsActivity.this.btPoint_onClicked(view);
+            }
+        });
+
+        bt_topology.setOnClickListener(this::btTopology_onClicked); // new flavour with java 8 lambda syntactic sugar
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
+    // always create event handling as this for better readiness of the code
+    protected void btPoint_onClicked(View view) {
+        Intent myIntent = new Intent(this, PointActivity.class);
+        //myIntent.putExtra("key", value); //Optional parameters
+        this.startActivity(myIntent);
+    }
+
+    protected void btTopology_onClicked(View view) {
+        Intent myIntent = new Intent(this, TopologyActivity.class);
+        //myIntent.putExtra("key", value); //Optional parameters
+        this.startActivity(myIntent);
+    }
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng sydney = new LatLng(48.8410651, 2.587376);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("ENSG"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 10));
     }
 }

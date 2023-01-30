@@ -53,6 +53,8 @@ MAPS_API_KEY=AIzaSyBRR1tCxqn8PJqtDX1e0mE7___________
 
 #### Layout des écrans
 
+![Enchaînement des écrans](resources/screen-logic.png)
+
 ````java
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout

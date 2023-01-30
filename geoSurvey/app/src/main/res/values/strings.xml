@@ -1,6 +1,16 @@
 <resources>
     <string name="app_name">geoSurvey</string>
     <string name="title_activity_maps">MapsActivity</string>
-    <string name="add_poi">Add point</string>
+    <string name="create_point">Create Marker</string>
     <string name="add_topo">Record topo</string>
+    <string name="name">Name</string>
+    <string name="enter_name">enter name</string>
+    <string name="address">Address</string>
+    <string name="geocoding">geocoding address</string>
+    <string name="create">Create</string>
+    <string name="cancel">Cancel</string>
+    <string name="get_address">Get address</string>
+    <string name="comment">Comment</string>
+    <string name="enter_comment">enter comment</string>
+    <string name="create_topology">Create Topology</string>
 </resources>
