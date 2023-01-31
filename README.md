@@ -51,11 +51,13 @@ Vous devez créer une application de relevé géographique qui s'articule en 4 g
 MAPS_API_KEY=AIzaSyBRR1tCxqn8PJqtDX1e0mE7___________
 ```
 
-#### Layout des écrans
+> :information_source: **Remarque:** La clé vous a été envoyé par e-mail hier à l'adresse `ing21@ensg.eu`!
 
-![Enchaînement des écrans](resources/screen-logic.png)
+4. Concernant la vue `activity_maps.xml` vous devez encapsuler le `fragment` dans un ConstraintLayout.
 
-````java
+Pour ce faire, lors de l'édition du layout, clickez sur le bouton ![code](resources/ide_code_button.png) et remplace le code source par celui-ci:
+
+```java
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
