@@ -124,7 +124,7 @@ dependencies {
 }
 ```
 
-2. Ensuite, pour que la modification doit prise en compte, il faut synchroniser le fichier à l'aide du bandeau contextuel ![sync graddle file](ressources/ide_graddle_sync.png).
+2. Ensuite, pour que la modification doit prise en compte, il faut synchroniser le fichier à l'aide du bandeau contextuel ![sync graddle file](resources/ide_graddle_sync.png).
 
 3. Puis, en vous aidant de la documentation de [developer android room](https://developer.android.com/training/data-storage/room?hl=fr#java), créez les deux entités suivantes:
 
