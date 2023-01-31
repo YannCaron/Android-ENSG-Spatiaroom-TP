@@ -3,6 +3,7 @@
     <string name="title_activity_maps">MapsActivity</string>
     <string name="create_point">Create Marker</string>
     <string name="add_topo">Record topo</string>
+    <string name="fin_topo">Save topo</string>
     <string name="name">Name</string>
     <string name="enter_name">enter name</string>
     <string name="address">Address</string>

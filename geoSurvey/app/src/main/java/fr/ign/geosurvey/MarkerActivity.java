@@ -11,44 +11,38 @@ import android.widget.EditText;
 
 import com.google.android.gms.maps.model.LatLng;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import co.anbora.labs.spatia.builder.SpatiaRoom;
-import co.anbora.labs.spatia.geometry.LineString;
 import co.anbora.labs.spatia.geometry.Point;
-import co.anbora.labs.spatia.geometry.Polygon;
 import fr.ign.geosurvey.data.AppDatabase;
 import fr.ign.geosurvey.data.Marker;
 import fr.ign.geosurvey.data.MarkerDao;
-import fr.ign.geosurvey.data.Topology;
-import fr.ign.geosurvey.data.TopologyDao;
 
-public class TopologyActivity extends AppCompatActivity implements Constants {
+public class MarkerActivity extends AppCompatActivity implements Constants {
 
-    private List<LatLng> topo;
+    private LatLng currentLatLng;
 
     private AppDatabase db;
-    private TopologyDao topologyDao;
+    private MarkerDao markerDao;
     private EditText et_name;
+    private EditText et_address;
     private EditText et_comment;
     private Button bt_create, bt_cancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_topology);
+        setContentView(R.layout.activity_marker);
 
         // database utils
         AppDatabase db = SpatiaRoom.INSTANCE.databaseBuilder(
                 getApplicationContext(),
                 AppDatabase.class, DB_NAME).allowMainThreadQueries().build();
 
-        topologyDao = db.topologyDao();
+        markerDao = db.markerDao();
 
         // get views instances
         et_name = this.findViewById(R.id.et_name);
+        et_address = this.findViewById(R.id.et_address);
         et_comment = this.findViewById(R.id.et_comment);
         bt_create = this.findViewById(R.id.bt_create);
         bt_cancel = this.findViewById(R.id.bt_cancel);
@@ -58,17 +52,14 @@ public class TopologyActivity extends AppCompatActivity implements Constants {
         bt_cancel.setOnClickListener(this::btCancel_onClick);
 
         // get data from intent
-        topo = this.getIntent().getExtras().getParcelableArrayList(MapsActivity.TOPO_KEY);
-        Log.i("ENSG", "Passed topology: " + Arrays.toString(topo.toArray()));
+        currentLatLng = this.getIntent().getExtras().getParcelable(MapsActivity.CURRENT_LATLNG_KEY);
+        Log.i("ENSG", "Passed location: " + currentLatLng);
+
     }
 
     protected void btCreate_onClick(View view) {
-
-        Topology t = new Topology(
-                et_name.getText().toString(),
-                et_comment.getText().toString(),
-                GeoConverters.latLngs2LineString(topo));
-        topologyDao.insertAll(t);
+        Marker m = new Marker(et_name.getText().toString(), et_address.getText().toString(), et_comment.getText().toString(), new Point(currentLatLng.longitude, currentLatLng.latitude, 4326));
+        markerDao.insertAll(m);
 
         this.startActivity(new Intent(this, MapsActivity.class));
     }

@@ -41,4 +41,17 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    // add location dependency
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
+
+    // add room dependencies c.f. https://developer.android.com/training/data-storage/room?hl=fr
+    def room_version = "2.5.0"
+
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+
+    // add spatiaroom dependency
+    implementation 'com.github.anboralabs:spatia-room:0.2.4'
+
 }
