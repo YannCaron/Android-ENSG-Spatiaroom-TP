@@ -11,7 +11,6 @@ public class Marker {
 
     @PrimaryKey(autoGenerate = true)
     public int uid;
-
     public String name;
     public String address;
     public String comment;
