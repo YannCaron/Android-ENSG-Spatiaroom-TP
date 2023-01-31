@@ -113,11 +113,47 @@ Même remarques que précédement !
 
 ### Partie II : Création de la base de donnée
 
+1. Dans un premier temps, il faut ajouter les dépendances dans el fichier `build.graddle` du module
+
+```groovy
+dependencies {
+    def room_version = "2.5.0"
+
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+}
+```
+
+2. Ensuite, pour que la modification doit prise en compte, il faut synchroniser le fichier à l'aide du bandeau contextuel ![sync graddle file](ressources/ide_graddle_sync.png).
+
+3. Puis, en vous aidant de la documentation de [developer android room](https://developer.android.com/training/data-storage/room?hl=fr#java), créez les deux entités suivantes:
+
 ```mermaid
 classDiagram
 class Marker {
     String name
     String address
     String comment
-} 
+}
+class Topology {
+    String name
+    String comment
+}
+```
+Pour chaque entité, il faut créer 2 classes :
+- Une pour l'entité (le PoJo qui représente la donnée)
+- Une pour le DAO (l'abstraction qui spécifie les opération CRUD à effectuer sur la base de donnée)
+
+> :warning: **Attention:** pour facilité la création des entités, il faut ajouter l'option `autogenerate=true` à l'annotaiton `@PrimaryKey` 
+
+Comme ceci:
+```java
+@Entity
+public class Marker {
+
+    @PrimaryKey(autoGenerate = true)
+    public int uid;
+
+    // ...
+}
 ```
