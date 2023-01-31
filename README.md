@@ -80,9 +80,9 @@ Pour ce faire, lors de l'édition du layout, clickez sur le bouton ![code](resou
 
 > :warning: **Attention:** Cette étape est primordiale pour la suite du TP!
 
-#### Layout des écrans
+#### Enchainement des écrans
 
-Vous devez présenter 3 écrans qui auront l'enchaînement suivant.
+Vous devez présenter 3 écrans qui auront l'enchaînement suivant:
 ![Enchaînement des écrans](resources/screen-logic.png)
 
 > :information_source: **Remarque:** Ne perdez pas trop de temps à placer les éléments exactement comme ils sont présentés. L'important c'est que ce soit utilisable :wink:
