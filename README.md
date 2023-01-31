@@ -19,15 +19,17 @@ Il vous est demandé de réaliser une application complète et utilisable.
 
 Vous devez créer une application de relevé géographique qui s'articule en 4 grande fonctionnalité:
 - Créer une interface utilisateur avec 3 écrans (5 points) :
-	- Une carte google map
-	- Un ecran de saisie des points d'intérêts
-	- Un ecran de saisie des relevés topographique
+	- Une carte **google map**
+	- Un ecran de saisie des **points d'intérêts**
+	- Un ecran de saisie des **relevés topographique**
 - Créer une base de donnée qui gère les points d'intérêts ainsi que les relevés (5 points) 
 - Instrumenter la base de donnée pour la basculer en mode Spatial avec SpatiaRoom (5 points) 
 - Enrichir l'application avec la possibilité de relever des données géographiques (5 points)
 - Bonus (3 points) enrichir les données avec du geocoding en utilisant les service de google
 
-### Création de l'interface
+### Partie I : Création de l'interface
+
+> :warning: **Attention:** Dans cette partie du TP, il ne vous est demandé que les **écrans** et la **navigation** entre ceux-ci. Les fonctionnalités seront demandées par la suite.
 
 #### Création du projet
 
@@ -85,7 +87,7 @@ Pour ce faire, lors de l'édition du layout, clickez sur le bouton ![code](resou
 Vous devez présenter 3 écrans qui auront l'enchaînement suivant:
 ![Enchaînement des écrans](resources/screen-logic.png)
 
-> :information_source: **Remarque:** Ne perdez pas trop de temps à placer les éléments exactement comme ils sont présentés. L'important c'est que ce soit utilisable :wink:
+> :information_source: **Remarque:** Ne perdez pas trop de temps à placer les éléments exactement comme ils sont présentés. L'important c'est que ce soit utilisable :wink:!
 
 #### Maps
 
@@ -94,9 +96,9 @@ Le but étant d'ajouter deux boutons **en sur-impression**, càd par dessus, com
 
 ![Ecran Maps](resources/screen-maps.png)
 
-#### Création d'un marqueur
+#### Création d'un point d'intérêt
 
-L'écran de création d'un marqueur est un formulaire classique comme vu en cours.
+L'écran de création d'un **point d'intérêt** est un formulaire classique comme vu en cours.
 Veuillez à bien utiliser les `Layout`. 
 
 ![Ecran Maps](resources/screen-point.png)
