@@ -115,9 +115,9 @@ Même remarques que précédement !
 
 ```mermaid
 classDiagram
-Marker : String name
-Marker : String address
-Marker : String comment
-Topology : String name
-Topology : String comment
+class Marker {
+    String name
+    String address
+    String comment
+} 
 ```
