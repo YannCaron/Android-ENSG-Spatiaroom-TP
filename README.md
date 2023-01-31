@@ -86,3 +86,26 @@ Vous devez présenter 3 écrans qui auront l'enchaînement suivant:
 ![Enchaînement des écrans](resources/screen-logic.png)
 
 > :information_source: **Remarque:** Ne perdez pas trop de temps à placer les éléments exactement comme ils sont présentés. L'important c'est que ce soit utilisable :wink:
+
+#### Maps
+
+L'écran `Maps` est l'écran qui a été créé par défaut lors de la création de l'application.
+Le but étant d'ajouter deux boutons **en sur-impression**, càd par dessus, comme un calque dans photoshop.
+
+![Ecran Maps](resources/screen-maps.png)
+
+#### Création d'un marqueur
+
+L'écran de création d'un marqueur est un formulaire classique comme vu en cours.
+Veuillez à bien utiliser les `Layout`. 
+
+![Ecran Maps](resources/screen-point.png)
+
+> :warning: **Attention:** Le **style** n'est pas obligatoire, seul la mise en place compte.
+
+#### Création d'un relevé
+
+Même remarques que précédement !
+
+![Ecran Maps](resources/screen-topology.png)
+
