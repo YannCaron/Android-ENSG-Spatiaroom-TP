@@ -51,7 +51,7 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
 
-    // add spatiaroom dependency
+    // add spatiaroom dependency c.f. https://github.com/anboralabs/spatia-room
     implementation 'com.github.anboralabs:spatia-room:0.2.4'
 
 }
