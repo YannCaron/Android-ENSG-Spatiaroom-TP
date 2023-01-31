@@ -22,9 +22,9 @@ Vous devez créer une application de relevé géographique qui s'articule en 4 g
 	- Une carte **google map**
 	- Un ecran de saisie des **points d'intérêts**
 	- Un ecran de saisie des **relevés topographique**
-- Créer une base de donnée qui gère les points d'intérêts ainsi que les relevés (5 points) 
-- Instrumenter la base de donnée pour la basculer en mode Spatial avec SpatiaRoom (5 points) 
+- Créer une base de donnée qui gère les points d'intérêts ainsi que les relevés topologiques (5 points) 
 - Enrichir l'application avec la possibilité de relever des données géographiques (5 points)
+- Instrumenter la base de donnée pour la basculer en mode Spatial avec SpatiaRoom (5 points) 
 - Bonus (3 points) enrichir les données avec du geocoding en utilisant les service de google
 
 ### Partie I : Création de l'interface
@@ -110,4 +110,6 @@ Veuillez à bien utiliser les `Layout`.
 Même remarques que précédement !
 
 ![Ecran Maps](resources/screen-topology.png)
+
+### Partie II : Création de la base de donnée
 
