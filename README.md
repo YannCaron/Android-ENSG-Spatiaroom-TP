@@ -18,14 +18,20 @@ Il vous est demandé de réaliser une application complète et utilisable.
 ## Cahier des charges
 
 Vous devez créer une application de relevé géographique qui s'articule en 4 grande fonctionnalité:
-- Créer une interface utilisateur avec 3 écrans (5 points) :
-	- Une carte **google map**
-	- Un ecran de saisie des **points d'intérêts**
-	- Un ecran de saisie des **relevés topographique**
-- Créer une base de donnée qui gère les points d'intérêts ainsi que les relevés topologiques (5 points) 
-- Enrichir l'application avec la possibilité de relever des données géographiques (5 points)
-- Instrumenter la base de donnée pour la basculer en mode Spatial avec SpatiaRoom (5 points) 
-- Bonus (3 points) enrichir les données avec du geocoding en utilisant les service de google
+- Créer une interface utilisateur avec 3 écrans :
+  - Une carte **google map** `(2 points)`
+  - Un ecran de saisie des **points d'intérêts** `(2 points)`
+  - Un ecran de saisie des **relevés topographique** `(1 point)`
+- Créer une base de donnée qui gère:
+  - les points d'intérêts `(3 points)`
+  - les relevés topologiques `(2 points)`
+- Enrichir l'application avec la possibilité de relever des données géographiques:
+  - être notifié par le changement de position du gps `(3 points)`
+  - enregistrer une liste de points dans le cadre d'un relevé topographique `(2 points)`
+- Instrumenter la base de donnée pour la basculer en mode Spatial avec SpatiaRoom
+  - enregistrer les points d'intérêt `(3 points)`
+  - enregistrer les relevés topographiques `(2 points)`
+- Bonus `(3 points)` enrichir les données avec du geocoding en utilisant les service de google
 
 ### Partie I : Création de l'interface
 
