@@ -22,7 +22,7 @@ Vous devez créer une application de relevé géographique qui s'articule en 4 g
   - Une carte **google map** `(2 points)`
   - Un ecran de saisie des **points d'intérêts** `(2 points)`
   - Un ecran de saisie des **relevés topographique** `(1 point)`
-- Créer une base de donnée qui gère:
+- Créer une base de donnée non géographique qui gère:
   - les points d'intérêts `(3 points)`
   - les relevés topologiques `(2 points)`
 - Enrichir l'application avec la possibilité de relever des données géographiques:
@@ -31,7 +31,7 @@ Vous devez créer une application de relevé géographique qui s'articule en 4 g
 - Instrumenter la base de donnée pour la basculer en mode Spatial avec SpatiaRoom
   - enregistrer les points d'intérêt `(3 points)`
   - enregistrer les relevés topographiques `(2 points)`
-- Bonus `(3 points)` enrichir les données avec du geocoding en utilisant les service de google
+- Bonus `(3 points)` enrichir les données avec du reverse geocoding en utilisant les services de google
 
 ### Partie I : Création de l'interface
 
@@ -47,8 +47,8 @@ Vous devez créer une application de relevé géographique qui s'articule en 4 g
    1. appelez-le `geoSurvey` ;
    2. choisissez un nom de package (par exemple `fr.ign.geosurvey`) ;
    3. choisissez un emplacement de sauvegarde (sur `D:\`) ;
-   3. sélectionnez le language Java ;
-   4. sélectionnez l'API 28: Android 9.0 (Pie).
+   4. sélectionnez le language Java ;
+   5. sélectionnez l'API 28: Android 9.0 (Pie).
 
 ![Écran de création](resources/new-project-name.png)
 
@@ -165,7 +165,7 @@ public class Marker {
 }
 ```
 
-4. Enfin, il faudra créer une nouvelle class `AppDatabase.java`
+4. Ensuite, il faudra créer une nouvelle class `AppDatabase.java`
 
 ```java
 package fr.ign.geosurvey.data;
@@ -190,3 +190,65 @@ public abstract class AppDatabase extends RoomDatabase {
 }
 
 ```
+
+5. Et enfin, il faut utiliser la base de donnée dans les activités :
+- MarkerActivity, pour sauver les maquers créer (nous nous chargerons des coordonnée dans la partie IIII)
+- TopologyActivity, pour tauver les tracés (même remarque que précédement)
+
+```java
+// database utils
+AppDatabase db = Room.databaseBuilder(getApplicationContext(),
+    AppDatabase.class, 'geoSurvey.sqlite').allowMainThreadQueries().build();
+
+// si besoin, récupère le dao de la table marker
+markerDao = db.markerDao();
+
+// si besoin, récupère le dao de la table topology
+topologyDao = db.topologyDao();
+```
+
+### Partie III : Relevé GPS
+
+A l'aide du [tutoriel de Valentin](https://github.com/VSasyan/AndroidENSG/blob/master/3_google_services/README.md) implémentez le relevé des données GPS.
+L'idée est d'être notifié à chaque changement de coordonée uniquement (inutile de récuper la dernière position connue).
+
+1. Dans la classe Il faudra ajouter les bonnes permissions dans le manifest
+2. Demande la permission d'accès à la position
+3. Ajouter le code qui permet d'être notifié lors d'un changement de coordonnée GPS `getCurrentLocation()`
+
+4. Une fois cette partie technique implémentée, il faudra l'instrumenter dans la class `MapActivity` afin de stoquer la position courante dans une variable d'instance appelé `private LatLng currentLatLng;`
+
+La partie concernant le relevé topologique est un peu différente.
+A partir du bouton `Record Topo` il faudra entretenir un booléen `isRecording` afin de gérer un toggle :
+- Lorsque l'utilisateur clique une fois, l'activity se met à enregistrer dans une liste les latlng du GPS. Le text du button change pour 'Save Topo'
+- Lorsque l'utilisateur clique une seconde fois sur le bouton, l'activity stope l'enregistrement, et appel l'activity `TopologyActivity` en lui passant la liste des coordonnées en paramètre.
+
+1. Il faut créer les variables d'instance nécéssaires:
+```java
+private boolean isRecording = false;
+private ArrayList<LatLng> topo;
+```
+
+Voici comment fonctionne le toggeling:
+```java
+// inverse boolean (toggling)
+isRecording = !isRecording;
+
+if (isRecording) {
+    // toggle button text
+    bt_topology.setText('Save Topo'); // Attention, pensez aux traductions possibles
+
+    // initialize path to record new one
+    topo = new ArrayList<>();
+} else {
+    // toggle button text
+    bt_topology.setText('Record Topo');  // Attention, pensez aux traductions possibles
+
+    // Appeller l'activity TopologyActivity
+}
+```
+
+> :warning: **Attention!** Pour passer une liste de `LatLng`, il faut utiliser la méthode `putParcelableArrayListExtra()` de l'intent. c.f. cours les [Android IHM Bases](https://github.com/YannCaron/Android-ENSG/blob/master/03%20-%20IHM%20Bases.pdf)
+
+
+
