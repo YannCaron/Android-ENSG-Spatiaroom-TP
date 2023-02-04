@@ -252,5 +252,22 @@ if (isRecording) {
 
 > :warning: **Attention!** Pour passer une liste de `LatLng`, il faut utiliser la méthode `putParcelableArrayListExtra()` de l'intent. c.f. cours les [Android IHM Bases](https://github.com/YannCaron/Android-ENSG/blob/master/03%20-%20IHM%20Bases.pdf)
 
+### Partie IV : Base de donnée spatiale
 
+Afin d'avoir la possibilité de sauvegarder les coordonnées géographiques, il est nécéssaire de convertir la base de donnée Sqlite en sa version spatial; SpatiaLite.
+Spatialite est une surcouche qui assure la conversion, l'indexation, ainsi que les calculs des données géographiques.
+Comme nous avions utiliser l'ORM `Room` pour acceder à notre base de donnée, nous allons utiliser `SpatiaRoom` pour convertir celle-ci dans sa version spatiale.
+
+Vous trouverez la documentation de [spatia-room ici](https://github.com/anboralabs/spatia-room)
+
+1. Dans une premier temps, il faut ajouter la dépendence au fichier `build.gradle` du module pour acceder à cette bibliothèque:
+
+```groovy
+dependencies {
+        implementation 'com.github.anboralabs:spatia-room:0.2.4'
+}
+```
+
+> :warning: **Attention!** il faut bien penser à synchroniser le fichier `gradle` avec le bouton contextuel:
+> ![sync graddle file](resources/ide_graddle_sync.png)
 
