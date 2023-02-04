@@ -225,7 +225,7 @@ A partir du bouton `Record Topo` il faudra entretenir un booléen `isRecording` 
 - Lorsque l'utilisateur clique une fois, l'activity se met à enregistrer dans une liste les latlng du GPS. Le text du button change pour 'Save Topo'
 - Lorsque l'utilisateur clique une seconde fois sur le bouton, l'activity stope l'enregistrement, et appel l'activity `TopologyActivity` en lui passant la liste des coordonnées en paramètre.
 
-1. Il faut créer les variables d'instance nécéssaires:
+5. Il faut créer les variables d'instance nécéssaires:
 ```java
 private boolean isRecording = false;
 private ArrayList<LatLng> topo;
@@ -271,3 +271,65 @@ dependencies {
 > :warning: **Attention!** il faut bien penser à synchroniser le fichier `gradle` avec le bouton contextuel:
 > ![sync graddle file](resources/ide_graddle_sync.png)
 
+2. Ensuite, il faut remplacer le `databaseBuilder` par celui de `spatia-room` chaque fois qu'il est utilisé par celui-ci
+
+```java
+AppDatabase db = SpatiaRoom.INSTANCE.databaseBuilder(
+    getApplicationContext(),
+    AppDatabase.class, DB_NAME).allowMainThreadQueries().build();
+```
+
+3. Et enfin, il faut ajouter l'annotation `@TypeConverters` dans la class `AppDatabase` afin d'indiquer comment convertir les données géographiques :
+
+```java
+@TypeConverters(GeometryConverters.class)
+public abstract class AppDatabase extends RoomDatabase {
+    public abstract MarkerDao markerDao();
+
+    public abstract TopologyDao topologyDao();
+}
+```
+
+4. Maintenant que vous avez converti votre base de données en base de données spatiale, il vous reste à créer les champs dans les entités :
+- `public Point position;` dans l'entité `Marker` qui servira à sauvegarder le `LatLng` depuis l'activity `MarkerActivity`
+- `public LineString path;` dans l'entité `Topology` qui servira à sauvegarder la `List<LatLng>` depuis l'activité `TopologyActivity`
+
+> :warning: **Attention!** afin de sauvegarder les données géographiques, il faudra les convertir. En effet, googleMap comprend des `LatLng` et spatia-room des `POINT`, `POLYGON` et des `LINESTRING`.
+Pour ce faire, j'ai écrit une classe `GeoConverters.java` pour vous aider, que vous pouver copier dans votre projet :
+
+```java
+public class GeoConverters {
+
+    public static final int SRID = 4326;
+
+    public static Point latLng2Point(LatLng latLng) {
+        return new Point(latLng.longitude, latLng.latitude, SRID);
+    }
+
+    public static LatLng point2LatLng(Point point) {
+        return new LatLng(point.getY(), point.getX());
+    }
+
+    public static LineString latLngs2LineString(List<LatLng> latLngs) {
+        return new LineString(latLngs.stream().map(GeoConverters::latLng2Point).collect(Collectors.toList()));
+    }
+
+    public static ArrayList<LatLng> lineString2LatLng(LineString lineString) {
+        return (ArrayList<LatLng>) lineString.getPoints().stream().map(GeoConverters::point2LatLng).collect(Collectors.toList());
+    }
+
+}
+
+```
+
+Que vous pourrez utiliser ainsi :
+```java
+GeoConverters.latLng2Point(currentLatLng)
+```
+
+## Remerciements
+
+Merci à vous tous d'avoir participé à ce cours, et j'espère que Valentin et moi même vous aurons appris quelques petites choses sur Android :-)
+Bonne continuation et bonne réussite dans vos projets.
+
+Yann et Valentin
