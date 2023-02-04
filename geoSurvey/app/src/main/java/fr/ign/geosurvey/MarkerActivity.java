@@ -58,7 +58,7 @@ public class MarkerActivity extends AppCompatActivity implements Constants {
     }
 
     protected void btCreate_onClick(View view) {
-        Marker m = new Marker(et_name.getText().toString(), et_address.getText().toString(), et_comment.getText().toString(), new Point(currentLatLng.longitude, currentLatLng.latitude, 4326));
+        Marker m = new Marker(et_name.getText().toString(), et_address.getText().toString(), et_comment.getText().toString(), GeoConverters.latLng2Point(currentLatLng));
         markerDao.insertAll(m);
 
         this.startActivity(new Intent(this, MapsActivity.class));
