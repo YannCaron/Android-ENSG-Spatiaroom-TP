@@ -119,6 +119,8 @@ Même remarques que précédement !
 
 ### Partie II : Création de la base de donnée
 
+Pour créer la base de donnée de notre projet, nous allons utiliser la librairie `Room`. Room est un ORM (Object Relational Mapping) qui nous abstrait des aspects bas niveau de création et de requetage des bases de données.
+
 1. Dans un premier temps, il faut ajouter les dépendances dans el fichier `build.graddle` du module
 
 ```groovy
