@@ -32,6 +32,7 @@ Vous devez créer une application de relevé géographique qui s'articule en 4 g
   - enregistrer les points d'intérêt `(3 points)`
   - enregistrer les relevés topographiques `(2 points)`
 - Bonus `(3 points)` enrichir les données avec du reverse geocoding en utilisant les services de google
+- Bonus Bis `(2 points)` enrichir l'application avec vos idées, soyez créatif :wink:
 
 ### Partie I : Création de l'interface
 
@@ -427,6 +428,7 @@ Maintenant que vous avez fini votre application, vous pouvez l'améliorer:
 - Changer l'icon par défaut avec une icon que vous pourrez télécharger sur [IconFinder](https://www.iconfinder.com) et la transformer pour votre application android avec [Android Asset Studio](https://romannurik.github.io/AndroidAssetStudio/icons-launcher.html)
 - Améliorer le style et le placement des composants dans les vues
 - Changer les icons pour les markers ainsi que pour les relevés topographies
+- Ou toute autre idée, soyez créatifs :wink:
 
 Chaque amélioration se vera rétribuer d'1 ou 2 points :wink: alors bon courage :smile:
 
