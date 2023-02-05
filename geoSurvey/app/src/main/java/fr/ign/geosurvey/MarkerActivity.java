@@ -68,6 +68,7 @@ public class MarkerActivity extends AppCompatActivity implements Constants {
     protected void bt_get_address_onClick(View view) {
         Geocoder geocoder = new Geocoder(this);
 
+        // Utilisation Asynchrone de l'executor
         Executor executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
             try {
