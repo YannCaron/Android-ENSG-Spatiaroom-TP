@@ -198,7 +198,7 @@ public class MapsActivity extends FragmentActivity implements Constants, OnMapRe
     protected void loadDBTopologies() {
         List<Topology> topologies = topologyDao.getAll();
         for (Topology topology : topologies) {
-            mMap.addPolyline(new PolylineOptions().addAll(GeoConverters.lineString2LatLng(topology.path)));
+            mMap.addPolyline(new PolylineOptions().addAll(GeoConverters.lineString2LatLngs(topology.path)));
 
             LatLng firstLatLng = GeoConverters.point2LatLng(topology.path.getPoints().stream().findFirst().get());
             mMap.addMarker(new MarkerOptions()

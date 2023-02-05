@@ -25,7 +25,7 @@ public class GeoConverters {
         return new LineString(latLngs.stream().map(GeoConverters::latLng2Point).collect(Collectors.toList()));
     }
 
-    public static ArrayList<LatLng> lineString2LatLng(LineString lineString) {
+    public static ArrayList<LatLng> lineString2LatLngs(LineString lineString) {
         return (ArrayList<LatLng>) lineString.getPoints().stream().map(GeoConverters::point2LatLng).collect(Collectors.toList());
     }
 
