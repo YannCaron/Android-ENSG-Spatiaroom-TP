@@ -336,6 +336,11 @@ public class GeoConverters {
 
 }
 
+5. Enfin, maintenant que notre application est capable de stoquer nos coordonnées géographiques, il vous faut les lire et les exploiter dans l'activity `MapsActivity`
+- Lire les coordonnées des markers sauvegardés et les afficher sur la carte
+- Lire les relevés topographiques et créer un polygone à l'aide de la méthode `addPolyLine` de l'objet Map.
+Vous pouvez vous aider de la classe `GeoConverters` que je vous ai fournis avec l'utilisation des méthodes `point2LatLng` et `lineString2LatLng` respectivement pour les points et les lineStrings.
+
 ```
 
 Que vous pourrez utiliser ainsi :
@@ -405,6 +410,15 @@ runOnUiThread(() -> {
     // ...
 });
 ```
+
+## Points Bonus
+
+Maintenant que vous avez fini votre application, vous pouvez l'améliorer:
+- Changer l'icon par défaut avec une icon que vous pourrez télécharger sur [IconFinder](https://www.iconfinder.com) et la transformer pour votre application android avec [Android Asset Studio](https://romannurik.github.io/AndroidAssetStudio/icons-launcher.html)
+- Améliorer le style et le placement des composants dans les vues
+- Changer les icons pour les markers ainsi que pour les relevés topographies
+
+Chaque amélioration se vera rétribuer d'1 ou 2 points :wink: alors bon courage :smile:
 
 ## Remerciements
 
