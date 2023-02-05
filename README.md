@@ -327,6 +327,69 @@ Que vous pourrez utiliser ainsi :
 GeoConverters.latLng2Point(currentLatLng)
 ```
 
+### Partie V (Bonus): Geocoding Google
+
+Dans cette partie, vous allez acceder au service Google de Geocoding.
+Il ne vous sera pas util d'exécuter le tutoriel de Valentin, car Google propose une solution plus simple pour y parvenir.
+
+Il vous est demandé de suivre la documentation sur le site [developer.android.com](https://developer.android.com/reference/android/location/Geocoder)
+
+Vous allez devoir:
+
+1. Dans la géstion de l'évènement du boutton "GET ADDRESS" de créer une nouvelle instance de la classe `GeoCoder`. Attention à vos imports !
+
+2. Afin de recevoir l'adresse par rapport à vos coordonnées, vous dever appeller la méthode `getFromLocation` de cet objet.
+
+> :warning: **Attention**: Vous aller devoir gérer une exception de type `IOException`, pour ce faire vous pouvez encapsuler votre code dans le traitement suivant:
+```Java
+try {
+    // Ici le code qui génère l'éventuelle exception
+} catch (IOException e) {
+    throw new RuntimeException(e);
+}
+```
+
+L'objet Geocoder est un objet qui appelle un service web Google. L'appel à un service sous entend un appel à un processus distant qui pourra prendre du temps, indépendament de votre application. C'est pour cela qu'il est recommandé de gérer le processus de façon asynchrone.
+
+
+Pour cela, deux solution sont possibles:
+
+1. Une nouvelle signature de la méthode `getFromLocation` a été ajouté à l'**API 33** qui prends en paramètre un `listener`. Ce **listener** va permettre de traiter l'information a travers un `callback` qui sera appeller une fois l'information reçu du service.
+
+```Java
+public void getFromLocation (double latitude, 
+                double longitude, 
+                int maxResults, 
+                Geocoder.GeocodeListener listener)
+```
+Il suffit d'ajouter un objet de type `Geocoder.GeocodeListener` en faisant `new Geocoder.GeocodeListener() ...`
+
+L'inconvéniant de cet approche et qu'il oblige l'application à utiliser au minimum l'API 33 qui est très réscente. Cela réduit considérablement le nombre de téléphone compatible avec notre application **(5,2% au total)**. Il va certainement falloir attendre encore quelques années avant d'utiliser cette API.
+
+2. Utiliser la classe de gestion de concurrence `Executor` de Java.
+En effet, le JDK prévoie un ensemble de classe pour gérer les aspects asynchrones d'une application.
+Vous trouverez des exemple utiles sur cette page: [thread pool java](https://www.baeldung.com/thread-pool-java-and-guava)
+
+Notamment cet exemple:
+```Java
+Executor executor = Executors.newSingleThreadExecutor();
+executor.execute(() -> System.out.println("Hello World"));
+```
+Qui ecrit "Hello World" dans le terminal de façon asynchrone.
+A vous d'instrumenter ce code avec les besoins de votre application.
+
+> :warning: **Attention!** Lors de l'exécution de votre code, vous allez recevoir l'excéption suivante:
+>```Bash
+android.view.ViewRoot$CalledFromWrongThreadException: Only the original thread that created a view hierarchy can touch its views.
+```
+> Cette exception signify qu'il est interdit d'exécuter des instruction de mise à jour de composants dans la vue and d'autre processus (thread) que celui de la vu.
+> Pour pallier à celà, utilisez la méthode de l'activity suivante:
+```Java
+runOnUiThread(() -> {
+    // ...
+});
+```
+
 ## Remerciements
 
 Merci à vous tous d'avoir participé à ce cours, et j'espère que Valentin et moi même vous aurons appris quelques petites choses sur Android :-)
