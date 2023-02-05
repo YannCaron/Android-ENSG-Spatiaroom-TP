@@ -191,7 +191,7 @@ public class MapsActivity extends FragmentActivity implements Constants, OnMapRe
             mMap.addMarker(new MarkerOptions()
                     .position(latLng)
                     .title(marker.name)
-                    .snippet(marker.comment));
+                    .snippet(marker.address + "\n" + marker.comment));
         }
     }
 
