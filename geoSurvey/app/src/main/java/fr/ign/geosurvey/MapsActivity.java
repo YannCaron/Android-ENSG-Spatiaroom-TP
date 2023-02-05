@@ -21,7 +21,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -200,6 +199,7 @@ public class MapsActivity extends FragmentActivity implements Constants, OnMapRe
         for (Topology topology : topologies) {
             mMap.addPolyline(new PolylineOptions().addAll(GeoConverters.lineString2LatLngs(topology.path)));
 
+            // add a first marker
             LatLng firstLatLng = GeoConverters.point2LatLng(topology.path.getPoints().stream().findFirst().get());
             mMap.addMarker(new MarkerOptions()
                     .position(firstLatLng)
