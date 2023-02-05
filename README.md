@@ -379,7 +379,7 @@ Qui ecrit "Hello World" dans le terminal de façon asynchrone.
 A vous d'instrumenter ce code avec les besoins de votre application.
 
 > :warning: **Attention!** Lors de l'exécution de votre code, vous allez recevoir l'excéption suivante:
->```Bash
+```Bash
 android.view.ViewRoot$CalledFromWrongThreadException: Only the original thread that created a view hierarchy can touch its views.
 ```
 > Cette exception signify qu'il est interdit d'exécuter des instruction de mise à jour de composants dans la vue and d'autre processus (thread) que celui de la vu.
