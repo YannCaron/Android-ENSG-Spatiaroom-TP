@@ -29,9 +29,10 @@ Vous devez créer une application de relevé géographique qui s'articule en 4 g
   - être notifié par le changement de position du GPS `(3 points)`
   - enregistrer une liste de points dans le cadre d'un relevé topographique `(2 points)`
 - Instrumenter la base de données pour la basculer en mode Spatial avec [SpatiaRoom](https://github.com/anboralabs/spatia-room)
-  - enregistrer des points d'intérêt `(3 points)`
-  - enregistrer des relevés topographiques `(2 points)`
-- Bonus `(3 points)` enrichir les données avec du reverse geocoding en utilisant les services de Google.
+  - enregistrer et afficher des points d'intérêt `(3 points)`
+  - enregistrer et afficher des relevés topographiques `(2 points)`
+- Bonus `(3 points)` enrichir les données avec du reverse geocoding en utilisant les services de google
+- Bonus Bis `(2 points)` enrichir l'application avec vos idées, soyez créatif :wink:
 
 ### Partie I : Création de l'interface
 
@@ -258,7 +259,16 @@ Comme nous avions utilisé l'ORM `Room` pour accéder à notre base de données,
 
 Vous trouverez la documentation de [spatia-room ici](https://github.com/anboralabs/spatia-room)
 
-1. Dans une premier temps, il faut ajouter la dépendance dans le fichier `build.gradle` du module pour accéder à cette bibliothèque :
+1. Dans un premier temps, il faut ajouter le repository `jitpack` dans le fichier `settings.gradle` :
+```Groovy
+repositories {
+    google()
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+```
+
+2. Dans un second temps, il faut ajouter la dépendance au fichier `build.gradle` du module pour acceder à cette bibliothèque :
 
 ```groovy
 dependencies {
@@ -266,7 +276,7 @@ dependencies {
 }
 ```
 
-> :warning: **Attention!** il faut bien penser à synchroniser le fichier `gradle` avec le bouton contextuel :
+> :warning: **Attention !** il faut bien penser à synchroniser le fichier `gradle` avec le bouton contextuel :
 > ![sync graddle file](resources/ide_graddle_sync.png)
 
 2. Ensuite, il faut remplacer le `databaseBuilder` par celui de `spatia-room` chaque fois qu'il est utilisé par celui-ci
@@ -308,6 +318,8 @@ class Topology {
 }
 ```
 
+5. Maintenant que les Entités peuvent sauvegarder des coordonnées, il faut modifier les Activités `MarkerActivity` et `TopologyActivity` respectivement afin de sauvegarder les données géographiques.
+
 > :warning: **Attention!** afin de sauvegarder les données géographiques, il faudra les convertir. En effet, GoogleMap comprend des `LatLng` et spatia-room des `POINT`, `POLYGON` et des `LINESTRING`.
 
 Pour ce faire, j'ai écrit une classe `GeoConverters.java` pour vous aider, que vous pouvez copier dans votre projet :
@@ -335,6 +347,11 @@ public class GeoConverters {
 
 }
 ```
+
+6. Enfin, maintenant que notre application est capable de stoquer nos coordonnées géographiques, il vous faut les lire et les exploiter dans l'activity `MapsActivity`
+- Lire les coordonnées des markers sauvegardés et les afficher sur la carte
+- Lire les relevés topographiques et créer des polygones à l'aide de la méthode `addPolyLine` de l'objet Map.
+Vous pouvez vous aider de la classe `GeoConverters` que je vous ai fournis avec l'utilisation des méthodes `point2LatLng` et `lineString2LatLng` respectivement pour les points et les lineStrings.
 
 Que vous pourrez utiliser ainsi :
 ```java
@@ -403,6 +420,16 @@ runOnUiThread(() -> {
     // ...
 });
 ```
+
+## Points Bonus
+
+Maintenant que vous avez fini votre application, vous pouvez l'améliorer :
+- Changer l’icône par défaut avec une icône que vous pourrez télécharger sur [IconFinder](https://www.iconfinder.com) et la transformer pour votre application Android avec [Android Asset Studio](https://romannurik.github.io/AndroidAssetStudio/icons-launcher.html)
+- Améliorer le style et le placement des composants dans les vues ;
+- Changer les icônes pour les marqueurs ainsi que pour les relevés topographiques ;
+- Ou toute autre idée, soyez créatifs ! :wink:
+
+Chaque amélioration se verra rétribuer d'1 ou 2 points :wink: alors bon courage. :smile:
 
 ## Rendu
 

@@ -35,8 +35,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:paddingTop="5pt"
-            android:text="@string/enter_name" />
+            android:paddingTop="5pt" />
 
         <TextView
             android:id="@+id/textView3"
@@ -53,10 +52,10 @@
             <EditText
                 android:id="@+id/et_address"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="143dp"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPostalAddress" />
+                android:inputType="textMultiLine|textImeMultiLine|textPostalAddress" />
 
             <Button
                 android:id="@+id/bt_get_address"
@@ -82,8 +81,7 @@
             android:gravity="start"
             android:inputType="none"
             android:paddingTop="5pt"
-            android:singleLine="false"
-            android:text="@string/enter_comment" />
+            android:singleLine="false" />
 
         <LinearLayout
             android:layout_width="match_parent"
