@@ -3,6 +3,8 @@ package fr.ign.geosurvey;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +12,12 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.android.gms.maps.model.LatLng;
+
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import co.anbora.labs.spatia.builder.SpatiaRoom;
 import co.anbora.labs.spatia.geometry.Point;
@@ -23,10 +31,8 @@ public class MarkerActivity extends AppCompatActivity implements Constants {
 
     private AppDatabase db;
     private MarkerDao markerDao;
-    private EditText et_name;
-    private EditText et_address;
-    private EditText et_comment;
-    private Button bt_create, bt_cancel;
+    private EditText et_name, et_address, et_comment;
+    private Button bt_get_address, bt_create, bt_cancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +50,12 @@ public class MarkerActivity extends AppCompatActivity implements Constants {
         et_name = this.findViewById(R.id.et_name);
         et_address = this.findViewById(R.id.et_address);
         et_comment = this.findViewById(R.id.et_comment);
+        bt_get_address = this.findViewById(R.id.bt_get_address);
         bt_create = this.findViewById(R.id.bt_create);
         bt_cancel = this.findViewById(R.id.bt_cancel);
 
         // subscribe to events
+        bt_get_address.setOnClickListener(this::bt_get_address_onClick);
         bt_create.setOnClickListener(this::btCreate_onClick);
         bt_cancel.setOnClickListener(this::btCancel_onClick);
 
@@ -55,6 +63,25 @@ public class MarkerActivity extends AppCompatActivity implements Constants {
         currentLatLng = this.getIntent().getExtras().getParcelable(MapsActivity.CURRENT_LATLNG_KEY);
         Log.i("ENSG", "Passed location: " + currentLatLng);
 
+    }
+
+    protected void bt_get_address_onClick(View view) {
+        Geocoder geocoder = new Geocoder(this);
+
+        Executor executor = Executors.newSingleThreadExecutor();
+        executor.execute(() -> {
+            try {
+                List<Address> addresses = geocoder.getFromLocation(this.currentLatLng.latitude, this.currentLatLng.longitude, 1);
+                Log.i("ENSG", Arrays.toString(addresses.toArray()));
+
+                runOnUiThread(() -> {
+                    et_address.setText(addresses.stream().findFirst().get().getAddressLine(0));
+                });
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+        });
     }
 
     protected void btCreate_onClick(View view) {
@@ -67,4 +94,5 @@ public class MarkerActivity extends AppCompatActivity implements Constants {
     protected void btCancel_onClick(View view) {
         this.startActivity(new Intent(this, MapsActivity.class));
     }
+
 }
