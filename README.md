@@ -5,37 +5,37 @@
 Dans ce TP noté, nous allons revoir tout ce qui a été dit et effectué durant le cours, donc si vous avez bien suivi, ça devrait jouer (expression romande inside).
 Il vous est demandé de réaliser une application complète et utilisable.
 
-### Vous devez:
+### Vous devez :
 - Créer une application qui compile et s'exécute
 - Vous avez toute la journée, de 9h du matin à 15h30
 - Copier le devoir sur repertoire partagé de l'école à 15h30 **uniquement**
 
-### Vous avez le droit:
+### Vous avez le droit :
 - De vous servir du cours
 - De poser des questions à Monsieur **Google** en personne, s'il vous répond :-)
-- De m'appeller en dernier recours, si vous êtes coincé et que ça ne compile définitivement pas !
+- De m'appeler en dernier recours, si vous êtes coincés et que ça ne compile définitivement pas !
 
 ## Cahier des charges
 
-Vous devez créer une application de relevé géographique qui s'articule en 4 grande fonctionnalité:
+Vous devez créer une application de relevé géographique qui s'articule en 4 grandes fonctionnalités :
 - Créer une interface utilisateur avec 3 écrans :
   - Une carte **google map** `(2 points)`
-  - Un ecran de saisie des **points d'intérêts** `(2 points)`
-  - Un ecran de saisie des **relevés topographique** `(1 point)`
-- Créer une base de donnée non géographique qui gère:
+  - Un formulaire de saisie des **points d'intérêts** `(2 points)`
+  - Un formulaire de saisie des **relevés topographiques** `(1 point)`
+- Créer une base de données non géographique qui gère:
   - les points d'intérêts `(3 points)`
   - les relevés topologiques `(2 points)`
 - Enrichir l'application avec la possibilité de relever des données géographiques:
-  - être notifié par le changement de position du gps `(3 points)`
+  - être notifié par le changement de position du GPS `(3 points)`
   - enregistrer une liste de points dans le cadre d'un relevé topographique `(2 points)`
-- Instrumenter la base de donnée pour la basculer en mode Spatial avec SpatiaRoom
-  - enregistrer les points d'intérêt `(3 points)`
-  - enregistrer les relevés topographiques `(2 points)`
-- Bonus `(3 points)` enrichir les données avec du reverse geocoding en utilisant les services de google
+- Instrumenter la base de données pour la basculer en mode Spatial avec [SpatiaRoom](https://github.com/anboralabs/spatia-room)
+  - enregistrer des points d'intérêt `(3 points)`
+  - enregistrer des relevés topographiques `(2 points)`
+- Bonus `(3 points)` enrichir les données avec du reverse geocoding en utilisant les services de Google.
 
 ### Partie I : Création de l'interface
 
-> :warning: **Attention:** Dans cette partie du TP, il ne vous est demandé que les **écrans** et la **navigation** entre ceux-ci. Les fonctionnalités seront demandées par la suite.
+> :warning: **Attention :** Dans cette partie du TP, il ne vous est demandé que les **écrans** et la **navigation** entre ceux-ci. Les fonctionnalités seront demandées par la suite.
 
 #### Création du projet
 
@@ -52,18 +52,18 @@ Vous devez créer une application de relevé géographique qui s'articule en 4 g
 
 ![Écran de création](resources/new-project-name.png)
 
-3. De même que dans le [TP google service](https://github.com/VSasyan/AndroidENSG/tree/master/3_google_services) ajouter la clé d'API:
+3. De même que dans le [TP google service](https://github.com/VSasyan/AndroidENSG/tree/master/3_google_services) ajoutez la clé d'API :
 
 ```ini
 # ...
 MAPS_API_KEY=AIzaSyBRR1tCxqn8PJqtDX1e0mE7___________
 ```
 
-> :information_source: **Remarque:** La clé vous a été envoyé par e-mail hier à l'adresse `ing21@ensg.eu`!
+> :information_source: **Remarque :** La clé vous a été envoyée par e-mail à l'adresse `ing21@ensg.eu` !
 
-4. Concernant la vue `activity_maps.xml` vous devez encapsuler le `fragment` dans un ConstraintLayout.
+1. Concernant la vue `activity_maps.xml` vous devez encapsuler le `fragment` dans un `ConstraintLayout`.
 
-Pour ce faire, lors de l'édition du layout, clickez sur le bouton ![code](resources/ide_code_button.png) et remplace le code source par celui-ci:
+Pour ce faire, lors de l'édition du layout, cliquez sur le bouton ![code](resources/ide_code_button.png) et remplace le code source par celui-ci:
 
 ```java
 <?xml version="1.0" encoding="utf-8"?>
@@ -83,45 +83,44 @@ Pour ce faire, lors de l'édition du layout, clickez sur le bouton ![code](resou
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
 ```
 
-> :warning: **Attention:** Cette étape est primordiale pour la suite du TP!
+> :warning: **Attention :** Cette étape est primordiale pour la suite du TP !
 
 #### Enchainement des écrans
 
 Vous devez présenter 3 écrans qui auront l'enchaînement suivant:
 ![Enchaînement des écrans](resources/screen-logic.png)
 
-> :information_source: **Remarque:** Ne perdez pas trop de temps à placer les éléments exactement comme ils sont présentés. L'important c'est que ce soit utilisable :wink:!
+> :information_source: **Remarque :** Ne perdez pas trop de temps à placer les éléments exactement comme ils sont présentés. L'important c'est que ce soit utilisable :wink:!
 
 #### Maps
 
 L'écran `Maps` est l'écran qui a été créé par défaut lors de la création de l'application.
-Le but étant d'ajouter deux boutons **en sur-impression**, càd par dessus, comme un calque dans photoshop.
+Le but étant d'ajouter deux boutons **en sur-impression**, càd par dessus, comme un calque dans Photoshop.
 
 ![Ecran Maps](resources/screen-maps.png)
 
 #### Création d'un point d'intérêt
 
 L'écran de création d'un **point d'intérêt** est un formulaire classique comme vu en cours.
-Veuillez à bien utiliser les `Layout`. 
+Veuillez à bien utiliser les `Layout`.
 
 ![Ecran Maps](resources/screen-point.png)
 
-> :warning: **Attention:** Le **style** n'est pas obligatoire, seul la mise en place compte.
+> :warning: **Attention :** Le **style** n'est pas obligatoire, seul la mise en place compte.
 
 #### Création d'un relevé
 
-Même remarques que précédement !
+Même remarques que précédemment !
 
 ![Ecran Maps](resources/screen-topology.png)
 
 ### Partie II : Création de la base de donnée
 
-Pour créer la base de donnée de notre projet, nous allons utiliser la librairie `Room`. Room est un ORM (Object Relational Mapping) qui nous abstrait des aspects bas niveau de création et de requetage des bases de données.
+Pour créer la base de donnée de notre projet, nous allons utiliser la librairie `Room`. [Room](https://developer.android.com/training/data-storage/room?hl=fr) est un ORM (Object Relational Mapping) qui nous abstrait des aspects bas niveau de création et de requêtage des bases de données.
 
-1. Dans un premier temps, il faut ajouter les dépendances dans el fichier `build.graddle` du module
+1. Dans un premier temps, il faut ajouter les dépendances dans le fichier `build.graddle` du module :
 
 ```groovy
 dependencies {
@@ -150,10 +149,10 @@ class Topology {
 }
 ```
 Pour chaque entité, il faut créer 2 classes :
-- Une pour l'entité (le PoJo qui représente la donnée)
-- Une pour le DAO (l'abstraction qui spécifie les opération CRUD à effectuer sur la base de donnée)
+- Une pour l'entité (le PoJo qui représente la donnée) ;
+- Une pour le DAO (l'abstraction qui spécifie les opération CRUD à effectuer sur la base de donnée).
 
-> :warning: **Attention:** pour facilité la création des entités, il faut ajouter l'option `autogenerate=true` à l'annotaiton `@PrimaryKey` 
+> :warning: **Attention :** pour faciliter la création des entités, il faut ajouter l'option `autogenerate=true` à l'annotation `@PrimaryKey`
 
 Comme ceci:
 ```java
@@ -167,7 +166,7 @@ public class Marker {
 }
 ```
 
-4. Ensuite, il faudra créer une nouvelle class `AppDatabase.java`
+4. Ensuite, il faudra créer une nouvelle class `AppDatabase.java` :
 
 ```java
 package fr.ign.geosurvey.data;
@@ -184,7 +183,7 @@ import co.anbora.labs.spatia.geometry.GeometryConverters;
         exportSchema = false
 )
 
-// @TypeConverters(GeometryConverters.class) // Concerver pour plus tard, lors de l'utilisation de SpatiaRoom
+// @TypeConverters(GeometryConverters.class) // A conserver pour plus tard, lors de l'utilisation de SpatiaRoom
 public abstract class AppDatabase extends RoomDatabase {
     public abstract MarkerDao markerDao();
 
@@ -193,9 +192,9 @@ public abstract class AppDatabase extends RoomDatabase {
 
 ```
 
-5. Et enfin, il faut utiliser la base de donnée dans les activités :
-- MarkerActivity, pour sauver les maquers créer (nous nous chargerons des coordonnée dans la partie IIII)
-- TopologyActivity, pour tauver les tracés (même remarque que précédement)
+5. Et enfin, il faut utiliser la base de données dans les activités :
+- `MarkerActivity`, pour sauver les marqueurs créés (nous nous chargerons des coordonnées dans la partie IIII) ;
+- `TopologyActivity`, pour sauver les tracés (même remarque que précédemment).
 
 ```java
 // database utils
@@ -212,41 +211,40 @@ topologyDao = db.topologyDao();
 ### Partie III : Relevé GPS
 
 A l'aide du [tutoriel de Valentin](https://github.com/VSasyan/AndroidENSG/blob/master/3_google_services/README.md) implémentez le relevé des données GPS.
-L'idée est d'être notifié à chaque changement de coordonée uniquement (inutile de récuper la dernière position connue).
+L'idée est d'être notifié à chaque changement de coordonnée uniquement (inutile de récupérer la dernière position connue).
 
-1. Dans la classe Il faudra ajouter les bonnes permissions dans le manifest
-2. Demande la permission d'accès à la position
-3. Ajouter le code qui permet d'être notifié lors d'un changement de coordonnée GPS `getCurrentLocation()`
-
-4. Une fois cette partie technique implémentée, il faudra l'instrumenter dans la class `MapActivity` afin de stoquer la position courante dans une variable d'instance appelé `private LatLng currentLatLng;`
+1. Il faudra ajouter les bonnes permissions dans le manifest ;
+2. Il faudra demander les permissions d'accès à la position dans la classe JAva ;
+3. Ajouter le code qui permet d'être notifié lors d'un changement de coordonnée GPS `getCurrentLocation()` ;
+4. Une fois cette partie technique implémentée, il faudra l'instrumenter dans la class `MapActivity` afin de stocker la position courante dans une variable d'instance appelée `private LatLng currentLatLng;`.
 
 La partie concernant le relevé topologique est un peu différente.
 A partir du bouton `Record Topo` il faudra entretenir un booléen `isRecording` afin de gérer un toggle :
-- Lorsque l'utilisateur clique une fois, l'activity se met à enregistrer dans une liste les latlng du GPS. Le text du button change pour 'Save Topo'
-- Lorsque l'utilisateur clique une seconde fois sur le bouton, l'activity stope l'enregistrement, et appel l'activity `TopologyActivity` en lui passant la liste des coordonnées en paramètre.
+- Lorsque l'utilisateur clique une fois, l'activity se met à enregistrer dans une liste les latlng du GPS. Le text du button change pour 'Save Topo' ;
+- Lorsque l'utilisateur clique une seconde fois sur le bouton, l'activity arrête l'enregistrement, et appelle l'activity `TopologyActivity` en lui passant la liste des coordonnées en paramètre.
 
-5. Il faut créer les variables d'instance nécéssaires:
+5. Il faut créer les variables d'instance nécessaires :
 ```java
 private boolean isRecording = false;
 private ArrayList<LatLng> topo;
 ```
 
-Voici comment fonctionne le toggeling:
+Voici comment fonctionne le *toggeling* :
 ```java
 // inverse boolean (toggling)
 isRecording = !isRecording;
 
 if (isRecording) {
     // toggle button text
-    bt_topology.setText('Save Topo'); // Attention, pensez aux traductions possibles
+    bt_topology.setText("Save Topo"); // Attention, pensez aux traductions
 
     // initialize path to record new one
     topo = new ArrayList<>();
 } else {
     // toggle button text
-    bt_topology.setText('Record Topo');  // Attention, pensez aux traductions possibles
+    bt_topology.setText("Record Topo");  // Attention, pensez aux traductions
 
-    // Appeller l'activity TopologyActivity
+    // Appeler l'activity TopologyActivity
 }
 ```
 
@@ -254,13 +252,13 @@ if (isRecording) {
 
 ### Partie IV : Base de donnée spatiale
 
-Afin d'avoir la possibilité de sauvegarder les coordonnées géographiques, il est nécéssaire de convertir la base de donnée Sqlite en sa version spatial; SpatiaLite.
+Afin d'avoir la possibilité de sauvegarder les coordonnées géographiques, il est nécessaire de convertir la base de données Sqlite dans sa version spatiale : `SpatiaLite`.
 Spatialite est une surcouche qui assure la conversion, l'indexation, ainsi que les calculs des données géographiques.
-Comme nous avions utiliser l'ORM `Room` pour acceder à notre base de donnée, nous allons utiliser `SpatiaRoom` pour convertir celle-ci dans sa version spatiale.
+Comme nous avions utilisé l'ORM `Room` pour accéder à notre base de données, nous allons utiliser `SpatiaRoom` pour convertir celle-ci dans sa version spatiale.
 
 Vous trouverez la documentation de [spatia-room ici](https://github.com/anboralabs/spatia-room)
 
-1. Dans une premier temps, il faut ajouter la dépendence au fichier `build.gradle` du module pour acceder à cette bibliothèque:
+1. Dans une premier temps, il faut ajouter la dépendance dans le fichier `build.gradle` du module pour accéder à cette bibliothèque :
 
 ```groovy
 dependencies {
@@ -268,7 +266,7 @@ dependencies {
 }
 ```
 
-> :warning: **Attention!** il faut bien penser à synchroniser le fichier `gradle` avec le bouton contextuel:
+> :warning: **Attention!** il faut bien penser à synchroniser le fichier `gradle` avec le bouton contextuel :
 > ![sync graddle file](resources/ide_graddle_sync.png)
 
 2. Ensuite, il faut remplacer le `databaseBuilder` par celui de `spatia-room` chaque fois qu'il est utilisé par celui-ci
@@ -294,8 +292,8 @@ public abstract class AppDatabase extends RoomDatabase {
 - `public Point position;` dans l'entité `Marker` qui servira à sauvegarder le `LatLng` depuis l'activity `MarkerActivity`
 - `public LineString path;` dans l'entité `Topology` qui servira à sauvegarder la `List<LatLng>` depuis l'activité `TopologyActivity`
 
-> :warning: **Attention!** afin de sauvegarder les données géographiques, il faudra les convertir. En effet, googleMap comprend des `LatLng` et spatia-room des `POINT`, `POLYGON` et des `LINESTRING`.
-Pour ce faire, j'ai écrit une classe `GeoConverters.java` pour vous aider, que vous pouver copier dans votre projet :
+> :warning: **Attention!** afin de sauvegarder les données géographiques, il faudra les convertir. En effet, GoogleMap comprend des `LatLng` et spatia-room des `POINT`, `POLYGON` et des `LINESTRING`.
+Pour ce faire, j'ai écrit une classe `GeoConverters.java` pour vous aider, que vous pouvez copier dans votre projet :
 
 ```java
 public class GeoConverters {
@@ -319,7 +317,6 @@ public class GeoConverters {
     }
 
 }
-
 ```
 
 Que vous pourrez utiliser ainsi :
@@ -327,9 +324,23 @@ Que vous pourrez utiliser ainsi :
 GeoConverters.latLng2Point(currentLatLng)
 ```
 
+## Rendu
+
+Pour rendre votre travail, utilisez l'explorateur de fichiers Windows pour zipper (ZIP ou 7z) votre dossier **après avoir fermé Android Studio** (clic droit => 7z => Ajouter à "GeoSurvey.7z")) :
+
+![Création archive 7z](resources/screen-7zip-1.png)
+
+Renommez alors l'archive selon le modèle "NOM_Prenom.7z" :
+
+![Renommage archive 7z](resources/screen-7zip-2.png)
+
+Enfin, déposez le fichier sur `\\FormationTemp\IGN2\Android\Rendus`.
+
+**Conservez une copie du fichier en cas de problème.**
+
 ## Remerciements
 
-Merci à vous tous d'avoir participé à ce cours, et j'espère que Valentin et moi même vous aurons appris quelques petites choses sur Android :-)
+Merci à vous tous d'avoir participé à ce cours, et j'espère que Valentin et moi même vous aurons appris quelques petites choses sur Android et les application mobiles. :-)
 Bonne continuation et bonne réussite dans vos projets.
 
 Yann et Valentin
