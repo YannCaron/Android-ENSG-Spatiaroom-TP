@@ -361,15 +361,15 @@ GeoConverters.latLng2Point(currentLatLng)
 ### Partie V (Bonus): Geocoding Google
 
 Dans cette partie, vous allez accéder au service Google de Geocoding.
-Il ne vous sera pas utile d'exécuter le tutoriel de Valentin, car Google propose une solution plus simple pour y parvenir.
+Il ne vous sera pas utile d'exécuter le tutoriel de Valentin, nous allons directement utiliser la fonction de geocodage dans le Thread de l'activity. Cette méthode n'est pas conseillée par Google, mais nous permet de simplifier le code.
 
 Il vous est demandé de suivre la documentation sur le site [developer.android.com](https://developer.android.com/reference/android/location/Geocoder)
 
 Vous allez devoir :
 
-1. dans la gestion de l'événement du bouton "GET ADDRESS", créer une nouvelle instance de la classe `GeoCoder`. Attention à vos imports !
+1. Dans la gestion de l'événement du bouton "GET ADDRESS", créer une nouvelle instance de la classe `GeoCoder`. Attention à vos imports !
 
-2. afin de recevoir l'adresse par rapport à vos coordonnées, appeler la méthode `getFromLocation` de cet objet.
+2. afin de recevoir l'adresse par rapport à vos coordonnées, appelez la méthode `getFromLocation` de cet objet.
 
 > :warning: **Attention**: Vous aller devoir gérer une exception de type `IOException`, pour ce faire vous pouvez encapsuler votre code dans le traitement suivant:
 ```Java
@@ -380,46 +380,7 @@ try {
 }
 ```
 
-L'objet Geocoder est un objet qui appelle un service web Google. L'appel à un service sous entend un appel à un processus distant qui pourra prendre du temps, indépendamment de votre application. C'est pour cela qu'il est recommandé de gérer le processus de façon asynchrone.
-
-
-Pour cela, deux solution sont possibles:
-
-1. Une nouvelle signature de la méthode `getFromLocation` a été ajouté à l'**API 33** qui prends en paramètre un `listener`. Ce **listener** va permettre de traiter l'information a travers un `callback` qui sera appelé une fois l'information du service reçue :
-
-```Java
-public void getFromLocation (double latitude,
-                double longitude,
-                int maxResults,
-                Geocoder.GeocodeListener listener)
-```
-Il suffit d'ajouter un objet de type `Geocoder.GeocodeListener` en faisant `new Geocoder.GeocodeListener() ...`
-
-L'inconvénient de cet approche et qu'il oblige l'application à utiliser au minimum l'API 33 qui est très récente. Cela réduit considérablement le nombre de téléphones compatibles avec notre application **(5,2% au total)**. Il va certainement falloir attendre encore quelques années avant d'utiliser cette API...
-
-2. Utiliser la classe de gestion de concurrence `Executor` de Java.
-En effet, le JDK prévoit un ensemble de classes pour gérer les aspects asynchrones d'une application.
-Vous trouverez des exemple utiles sur cette page: [thread pool java](https://www.baeldung.com/thread-pool-java-and-guava)
-
-Notamment cet exemple:
-```Java
-Executor executor = Executors.newSingleThreadExecutor();
-executor.execute(() -> System.out.println("Hello World"));
-```
-Qui écrit "Hello World" dans le terminal de façon asynchrone.
-A vous d'instrumenter ce code avec les besoins de votre application.
-
-> :warning: **Attention !** Lors de l'exécution de votre code, vous allez recevoir l’exception suivante :
-```Bash
-android.view.ViewRoot$CalledFromWrongThreadException: Only the original thread that created a view hierarchy can touch its views.
-```
-> Cette exception signifie qu'il est interdit d'exécuter des instructions de mise à jour de composants dans la vue and d'autre processus (thread) que celui de la Vue.
-> Pour pallier à cela, utilisez la méthode de l'activity suivante :
-```Java
-runOnUiThread(() -> {
-    // ...
-});
-```
+3. Maintenant que l'adresse est reçu par le **Geocoder**, il faut mettre cette adresse dans le champs **adresse** de l'activity.
 
 ## Points Bonus
 
