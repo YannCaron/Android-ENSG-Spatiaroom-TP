@@ -260,7 +260,16 @@ Comme nous avions utiliser l'ORM `Room` pour acceder à notre base de donnée, n
 
 Vous trouverez la documentation de [spatia-room ici](https://github.com/anboralabs/spatia-room)
 
-1. Dans une premier temps, il faut ajouter la dépendence au fichier `build.gradle` du module pour acceder à cette bibliothèque:
+1. Dans un premier temps, il faut ajouter le repository `jitpack` dans le fichier `settings.gradle`:
+```Groovy
+repositories {
+    google()
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+```
+
+2. Dans un second temps, il faut ajouter la dépendence au fichier `build.gradle` du module pour acceder à cette bibliothèque:
 
 ```groovy
 dependencies {
