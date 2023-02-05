@@ -310,6 +310,8 @@ class Topology {
 }
 ```
 
+5. Maintenant que les Entités peuvent sauvegarder des coordonnées, il faut modifier les Activités `MarkerActivity` et `TopologyActivity` respectivement afin de sauvegarder les données géographiques.
+
 > :warning: **Attention!** afin de sauvegarder les données géographiques, il faudra les convertir. En effet, googleMap comprend des `LatLng` et spatia-room des `POINT`, `POLYGON` et des `LINESTRING`.
 Pour ce faire, j'ai écrit une classe `GeoConverters.java` pour vous aider, que vous pouver copier dans votre projet :
 
@@ -335,13 +337,12 @@ public class GeoConverters {
     }
 
 }
-
-5. Enfin, maintenant que notre application est capable de stoquer nos coordonnées géographiques, il vous faut les lire et les exploiter dans l'activity `MapsActivity`
-- Lire les coordonnées des markers sauvegardés et les afficher sur la carte
-- Lire les relevés topographiques et créer un polygone à l'aide de la méthode `addPolyLine` de l'objet Map.
-Vous pouvez vous aider de la classe `GeoConverters` que je vous ai fournis avec l'utilisation des méthodes `point2LatLng` et `lineString2LatLng` respectivement pour les points et les lineStrings.
-
 ```
+
+6. Enfin, maintenant que notre application est capable de stoquer nos coordonnées géographiques, il vous faut les lire et les exploiter dans l'activity `MapsActivity`
+- Lire les coordonnées des markers sauvegardés et les afficher sur la carte
+- Lire les relevés topographiques et créer des polygones à l'aide de la méthode `addPolyLine` de l'objet Map.
+Vous pouvez vous aider de la classe `GeoConverters` que je vous ai fournis avec l'utilisation des méthodes `point2LatLng` et `lineString2LatLng` respectivement pour les points et les lineStrings.
 
 Que vous pourrez utiliser ainsi :
 ```java
