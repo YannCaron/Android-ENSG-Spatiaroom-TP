@@ -167,7 +167,7 @@ public class MapsActivity extends FragmentActivity implements Constants, OnMapRe
             @Override
             public void onLocationResult(LocationResult locationResult) {
                 for (Location location : locationResult.getLocations()) {
-                    Log.i("ENSG", "currentLocation : " + location);
+                    Log.d("GPS", "currentLocation : " + location);
 
                     // save current location
                     currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());

@@ -14,9 +14,7 @@ public class Topology {
 
     public String name;
     public String comment;
-
     public LineString path;
-
     public Topology() {
     }
 
