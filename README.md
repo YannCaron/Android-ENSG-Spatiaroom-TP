@@ -294,6 +294,22 @@ public abstract class AppDatabase extends RoomDatabase {
 - `public Point position;` dans l'entité `Marker` qui servira à sauvegarder le `LatLng` depuis l'activity `MarkerActivity`
 - `public LineString path;` dans l'entité `Topology` qui servira à sauvegarder la `List<LatLng>` depuis l'activité `TopologyActivity`
 
+Soit modifier les entités comme suit:
+```mermaid
+classDiagram
+class Marker {
+    String name
+    String address
+    String comment
+    Point position
+}
+class Topology {
+    String name
+    String comment
+    LineString path
+}
+```
+
 > :warning: **Attention!** afin de sauvegarder les données géographiques, il faudra les convertir. En effet, googleMap comprend des `LatLng` et spatia-room des `POINT`, `POLYGON` et des `LINESTRING`.
 Pour ce faire, j'ai écrit une classe `GeoConverters.java` pour vous aider, que vous pouver copier dans votre projet :
 
