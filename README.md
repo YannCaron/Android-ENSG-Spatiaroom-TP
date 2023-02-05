@@ -184,7 +184,7 @@ import co.anbora.labs.spatia.geometry.GeometryConverters;
         exportSchema = false
 )
 
-// @TypeConverters(GeometryConverters.class) // Concerver pour plus tard, lors de l'utilisation de SpatiaRoom
+// @TypeConverters(GeometryConverters.class) // Conserver pour plus tard, lors de l'utilisation de SpatiaRoom
 public abstract class AppDatabase extends RoomDatabase {
     public abstract MarkerDao markerDao();
 
