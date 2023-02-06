@@ -386,8 +386,15 @@ try {
 
 Maintenant que vous avez fini votre application, vous pouvez l'améliorer :
 - Changer l’icône par défaut avec une icône que vous pourrez télécharger sur [IconFinder](https://www.iconfinder.com) et la transformer pour votre application Android avec [Android Asset Studio](https://romannurik.github.io/AndroidAssetStudio/icons-launcher.html)
+- Changer le thème et les couleurs de l'application
+- Gérer de multiples langues (internationalisation) et créer une traduction
 - Améliorer le style et le placement des composants dans les vues ;
 - Changer les icônes pour les marqueurs ainsi que pour les relevés topographiques ;
+- Une page de présentation / a propos / aide
+- La gestion du zoom de la carte
+- Acceder aux données météo ou tout autre type d'appel à des API externe
+- Une aide contextuelle, des tooltips
+- Des toast pour prévenir l'utilisateur de certaines actions
 - Ou toute autre idée, soyez créatifs ! :wink:
 
 Chaque amélioration se verra rétribuer d'1 ou 2 points :wink: alors bon courage. :smile:
