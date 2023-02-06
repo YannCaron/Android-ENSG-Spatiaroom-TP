@@ -366,7 +366,7 @@ GeoConverters.latLng2Point(currentLatLng)
 2. Ensuite il vous suffit de séléctionner l'onglet `Location` puis `Routes` et enfin de cliquer sur `Import GPX/KLM` :
 ![Extended Controls](resources/ide_extended_controls.png)
 
-3. Vous pouvez télécharger le fichier GPX suivant: [Randonnée-Moustier-Sainte-Marie](resources/download/randonnee-moustier.gpx)
+3. Vous pouvez télécharger le fichier GPX suivant: [Randonnée-Moustier-Sainte-Marie](resources/download/randonnee-moustier.zip)
 
 4. Et enfin, vous pouvez envoyer des données GPS à votre emulateur en cliquant sur le bouton `PLAY ROUTE`:
 ![Play Route](resources/ide_ext_play_route.png)
