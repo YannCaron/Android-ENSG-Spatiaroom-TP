@@ -170,14 +170,6 @@ public class Marker {
 4. Ensuite, il faudra créer une nouvelle class `AppDatabase.java` :
 
 ```java
-package fr.ign.geosurvey.data;
-
-import androidx.room.Database;
-import androidx.room.RoomDatabase;
-import androidx.room.TypeConverters;
-
-import co.anbora.labs.spatia.geometry.GeometryConverters;
-
 @Database(
         entities = {Marker.class, Topology.class},
         version = 1,
