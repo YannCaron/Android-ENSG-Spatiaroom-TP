@@ -192,7 +192,7 @@ public abstract class AppDatabase extends RoomDatabase {
 ```java
 // database utils
 AppDatabase db = Room.databaseBuilder(getApplicationContext(),
-    AppDatabase.class, 'geoSurvey.sqlite').allowMainThreadQueries().build();
+    AppDatabase.class, "geoSurvey.sqlite").allowMainThreadQueries().build();
 
 // si besoin, récupère le dao de la table marker
 markerDao = db.markerDao();
